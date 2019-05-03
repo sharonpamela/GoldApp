@@ -47,7 +47,7 @@ export default function(){
     <AppContext.Consumer>
     {({user}) => (
     <Bar>
-      <Logo> CryptoDash </Logo>
+      <Logo> Gold </Logo>
       <div/>
       { user ? 
         <a href="http://localhost:3001/api/logout"><ControlButton name="logout"/></a>:

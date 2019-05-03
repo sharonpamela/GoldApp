@@ -2,8 +2,10 @@ import React from 'react';
 import _ from 'lodash';
 import moment from 'moment';
 import axios from 'axios';
-const cc = require('cryptocompare');
+import API from "../utils/API";
 
+
+const cc = require('cryptocompare');
 export const AppContext = React.createContext();
 
 const MAX_FAVORITES = 10;
@@ -15,7 +17,8 @@ export class AppProvider extends React.Component {
     this.state = {
       page: 'dashboard',
       user: undefined,
-      favorites: ['BTC', 'ETH', 'XMR', 'DOGE'],
+      balance:0,
+      favorites: ['BTC','ETH'],
       timeInterval: 'months',
       ...this.savedSettings(),
       setPage: this.setPage,
@@ -25,7 +28,9 @@ export class AppProvider extends React.Component {
       confirmFavorites: this.confirmFavorites,
       setCurrentFavorite: this.setCurrentFavorite,
       setFilteredCoins: this.setFilteredCoins,
-      changeChartSelect: this.changeChartSelect
+      changeChartSelect: this.changeChartSelect,
+      buyButton: this.buyButton,
+      sellButton: this.sellButton
     }
   }
 
@@ -33,7 +38,8 @@ export class AppProvider extends React.Component {
     this.fetchCoins();
     this.fetchPrices();
     this.fetchHistorical();
-    this.fetchUser()
+    this.fetchUser();
+    this.fetchBalance();
   }
 
   fetchCoins = async () => {
@@ -46,6 +52,13 @@ export class AppProvider extends React.Component {
     console.log(user);
     this.setState( {user : user.data} );
   }
+
+  fetchBalance = async () => {
+    // await API.fetchBalance ({user:this.state.user.id})
+    // let balance =  await axios.get('/api/user_bal')
+    // this.setState ( { balance : balance.data })
+  }
+
 
   fetchPrices = async () => {
     if(this.state.firstVisit) return;
@@ -151,6 +164,34 @@ export class AppProvider extends React.Component {
     return {favorites, currentFavorite};
   }
 
+  buyButton = async (currentFavorite) => {
+    console.log("buy button hit");
+    // the balance will be on the front end as well as user id from google 
+    // send that data to the back with the price and coin 
+    this.state.prices.forEach(async price => {
+      if (price[this.state.currentFavorite]) {
+        console.log(price[this.state.currentFavorite].USD.PRICE);
+        await API.buyButton({
+          price: price[this.state.currentFavorite].USD.PRICE
+          // coin: this.state.currentFavorite,
+        })
+      }
+    })
+  };
+
+  sellButton = (currentFavorite) => {
+    console.log("sell button hit");
+    this.state.prices.forEach(async price => {
+      if (price[this.state.currentFavorite]) {
+        console.log(price[this.state.currentFavorite].USD.PRICE);
+        await API.sellButton({
+          price: price[this.state.currentFavorite].USD.PRICE
+          // coin: this.state.currentFavorite
+        })
+      }
+    })
+  }
+
   setPage = page => this.setState({page})
 
   setFilteredCoins = (filteredCoins) => this.setState({filteredCoins})
@@ -160,7 +201,7 @@ export class AppProvider extends React.Component {
   }
 
   render(){
-    console.log(this.state.user);
+    // console.log(this.state.user);
     return (
       <AppContext.Provider value={this.state}>
         {this.props.children}
