@@ -1,7 +1,6 @@
 - 
 - TODO:
 - implement balance button, show balance in dashboard
-- fix proxy
 - render condition buy/sell buttons for 5 coins
 - logic for balance and inventory
 -  db.users.findOneAndUpdate({ _id:'5ccbdf517c5d7e3893dcd753'}, {$set: {balance:200}})
@@ -12,3 +11,7 @@
 - show the amount of coins owned (show below buy/sell if they own the coin then show how many they currently have, if they don't own, don't render the sell button)
 - Landing page: login button and a show clean tiles
 - if the user doesn't want to log in then just show the pages with no buy/sell and no balance, and no owned coins
+
+
+DONZO:
+- fix proxy

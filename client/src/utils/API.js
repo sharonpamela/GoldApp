@@ -7,8 +7,6 @@ export default {
   },
   // Saves a book to the database
   saveUser: function (userData) {
-    console.log("creating post for user's new favorites...")
-    console.log("THIS IS THE USER'S DATA", userData)
     return axios.post("/api/users", userData);
   },
   // Gets the book with the given id

@@ -53,12 +53,12 @@ module.exports = {
 
   buyButton: function (req, res) {
     console.log(req.body, "buy");
-    db.Users
-    var newBal = req.body.balance - req.body.price;
-    db.Users
-      .findOneAndUpdate({ user_id: 33 }, { balance: newBal })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+    // db.Users
+    // var newBal = req.body.balance - req.body.price;
+    // db.Users
+    //   .findOneAndUpdate({ user_id: 33 }, { balance: newBal })
+    //   .then(dbModel => res.json(dbModel))
+    //   .catch(err => res.status(422).json(err));
   },
 
   sellButton: function (req, res) {
