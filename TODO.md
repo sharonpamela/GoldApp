@@ -1,6 +1,5 @@
 - 
 - TODO:
-- implement balance button, show balance in dashboard
 - render condition buy/sell buttons for 5 coins
 - logic for balance and inventory
 -  db.users.findOneAndUpdate({ _id:'5ccbdf517c5d7e3893dcd753'}, {$set: {balance:200}})
@@ -15,3 +14,4 @@
 
 DONZO:
 - fix proxy
+- implement balance button, show balance in dashboard

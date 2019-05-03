@@ -39,7 +39,7 @@ export class AppProvider extends React.Component {
     this.fetchPrices();
     this.fetchHistorical();
     this.fetchUser();
-    this.fetchBalance();
+    
   }
 
   fetchCoins = async () => {
@@ -49,16 +49,8 @@ export class AppProvider extends React.Component {
 
   fetchUser = async () => {
     let user = await axios.get('/api/current_user')
-    console.log(user);
     this.setState( {user : user.data} );
   }
-
-  fetchBalance = async () => {
-    // await API.fetchBalance ({user:this.state.user.id})
-    // let balance =  await axios.get('/api/user_bal')
-    // this.setState ( { balance : balance.data })
-  }
-
 
   fetchPrices = async () => {
     if(this.state.firstVisit) return;

@@ -12,6 +12,10 @@ const Bar = styled.div`
   grid-template-columns: 180px auto 100px 100px; 
 `
 
+const Balance = styled.div`
+  font-size: 2em;
+`
+
 const ControlButtonElem = styled.div`
   cursor: pointer; 
   ${props => props.active && css`
@@ -48,7 +52,11 @@ export default function(){
     {({user}) => (
     <Bar>
       <Logo> Gold </Logo>
-      <div/>
+      { user ? 
+        <Balance>${user.balance}</Balance> :
+        <h3>Hello!</h3>
+      }
+      
       { user ? 
         <a href="http://localhost:3001/api/logout"><ControlButton name="logout"/></a>:
         <a href="http://localhost:3001/auth/google"><ControlButton name="login"/></a> 
