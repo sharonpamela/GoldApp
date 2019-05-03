@@ -9,7 +9,8 @@ const Logo = styled.div`
 const Bar = styled.div`
   display: grid; 
   margin-bottom: 40px; 
-  grid-template-columns: 180px auto 100px 100px; 
+  grid-template-columns: 180px 1fr 1fr 100px 100px; 
+  background-color:black;
 `
 
 const Balance = styled.div`
@@ -53,7 +54,7 @@ export default function(){
     <Bar>
       <Logo> Gold </Logo>
       { user ? 
-        <Balance>${user.balance}</Balance> :
+        <Balance>Balance: ${user.balance}</Balance> :
         <h3>Hello!</h3>
       }
       

@@ -4,7 +4,6 @@
 - logic for balance and inventory
 -  make landing page
 -  return "error not found" if user is NOT logged (don't display dasboard or the settings pages if user is NOT logged in)
-- add theme AND (toggle button to settings page)
 - have away for user to know which ones they own (disabled tile and put in favorites if they own them)
 - show the amount of coins owned (show below buy/sell if they own the coin then show how many they currently have, if they don't own, don't render the sell button)
 - Landing page: login button and a show clean tiles
@@ -15,9 +14,16 @@ DONZO:
 - fix proxy
 - implement balance button, show balance in dashboard
 - verified: -  db.users.findOneAndUpdate({ _id:'5ccbdf517c5d7e3893dcd753'}, {$set: {balance:200}})
-
+- add theme AND (toggle button to settings page)
 
 color toggle: -> 
 App/app.css
 shared/styles.js
 dashboard/HighchartsTheme.js
+App/AppBar.js:
+        const Bar = styled.div`
+        display: grid; 
+        margin-bottom: 40px; 
+        grid-template-columns: 180px auto 100px 100px; 
+        background-color:black; <------------- changed this too
+        `
