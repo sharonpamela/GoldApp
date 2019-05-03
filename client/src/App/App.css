@@ -1,5 +1,8 @@
 body {
-    background-color: #010e2c;
-    color: white;
+    background-color: gold;
+    color: gold;
     font-family: 'Do Hyeon', sans-serif;
+    background-image: url("./../images/gold-melt-2.jpg");
+    background-repeat: repeat; 
+    background-size: 100%;
 }

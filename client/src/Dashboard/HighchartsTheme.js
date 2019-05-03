@@ -12,11 +12,11 @@ export default {
     '#1B2839'
   ],
   chart: {
-    backgroundColor: lightTheme ? 'white' : '#061a44',
-    borderColor: '#000000',
+    backgroundColor: lightTheme ? 'white' : 'black',// box around the graph, behind axis text
+    borderColor: 'yellow',
     borderWidth: 0,
     className: 'dark-container',
-    plotBackgroundColor: lightTheme ? 'white' : '#061a44',
+    plotBackgroundColor: lightTheme ? 'white' : '#F0E68C',  // behind the line graph, the plane
     plotBorderWidth: 0
   },
   title: {

@@ -2,7 +2,6 @@
 - TODO:
 - render condition buy/sell buttons for 5 coins
 - logic for balance and inventory
--  db.users.findOneAndUpdate({ _id:'5ccbdf517c5d7e3893dcd753'}, {$set: {balance:200}})
 -  make landing page
 -  return "error not found" if user is NOT logged (don't display dasboard or the settings pages if user is NOT logged in)
 - add theme AND (toggle button to settings page)
@@ -15,3 +14,10 @@
 DONZO:
 - fix proxy
 - implement balance button, show balance in dashboard
+- verified: -  db.users.findOneAndUpdate({ _id:'5ccbdf517c5d7e3893dcd753'}, {$set: {balance:200}})
+
+
+color toggle: -> 
+App/app.css
+shared/styles.js
+dashboard/HighchartsTheme.js
