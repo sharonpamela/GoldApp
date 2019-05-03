@@ -3,6 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import axios from 'axios';
 import API from "../utils/API";
+import { set } from 'mongoose';
 
 
 const cc = require('cryptocompare');
@@ -157,16 +158,27 @@ export class AppProvider extends React.Component {
   }
 
   buyButton = async (currentFavorite) => {
-    console.log("buy button hit");
+   // console.log("buy button hit balance", this.state.user.balance);
     // the balance will be on the front end as well as user id from google 
     // send that data to the back with the price and coin 
+
     this.state.prices.forEach(async price => {
       if (price[this.state.currentFavorite]) {
         console.log(price[this.state.currentFavorite].USD.PRICE);
-        await API.buyButton({
-          price: price[this.state.currentFavorite].USD.PRICE
-          // coin: this.state.currentFavorite,
-        })
+        
+        const response = await API.buyButton({
+          price: price[this.state.currentFavorite].USD.PRICE,
+          balance: this.state.user.balance,
+          googleId: this.state.user.googleId
+         // owned: //array of ojects
+          });
+      console.log(response.data.balance, "response")
+      this.fetchUser();
+      const numberFormat = number => {
+        return +(number + '').slice(0, 7);
+      }
+            
+      this.setState({balance: numberFormat(response.data.balance)})
       }
     })
   };

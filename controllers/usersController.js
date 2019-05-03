@@ -1,11 +1,13 @@
 const db = require('../models/User');
-// const mongojs = require("mongojs");
+const mongoose = require("mongoose")
+//const mongojs = require("mongojs");
+const User = mongoose.model('users');
 
 // Defining methods for the usersController
 module.exports = {
 
   findAll: function (req, res) {
-    db.Users
+    db.User
       .find()
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
@@ -53,18 +55,17 @@ module.exports = {
 
   buyButton: function (req, res) {
     console.log(req.body, "buy");
-    // db.Users
-    // var newBal = req.body.balance - req.body.price;
-    // db.Users
-    //   .findOneAndUpdate({ user_id: 33 }, { balance: newBal })
-    //   .then(dbModel => res.json(dbModel))
-    //   .catch(err => res.status(422).json(err));
+    var newBal = req.body.balance - req.body.price;
+    User
+      .findOneAndUpdate( req.body.googleId, {balance: newBal})
+      .then(dbModel => {console.log(dbModel), res.json(dbModel)})
+      .catch(err => res.status(422).json(err));
   },
 
   sellButton: function (req, res) {
     console.log(req.body, "sell");
     var newBal = req.body.balance + req.body.price;
-    db.Users
+    db.User
       .findOneAndUpdate({ user_id: 22 }, { balance: newBal })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

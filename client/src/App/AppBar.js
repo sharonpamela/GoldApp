@@ -14,7 +14,7 @@ const Bar = styled.div`
 `
 
 const Balance = styled.div`
-  font-size: 2em;
+  font-size: 1.5em;
 `
 
 const ControlButtonElem = styled.div`
