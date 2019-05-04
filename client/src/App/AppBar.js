@@ -52,20 +52,21 @@ export default function(){
     <AppContext.Consumer>
     {({user}) => (
     <Bar>
-      <Logo> Gold </Logo>
+      <Logo>Gold</Logo>
       { user ? 
         <Balance>Balance: ${user.balance}</Balance> :
         <h3>Hello!</h3>
       }
-      
       { user ? 
         <a href="http://localhost:3001/api/logout"><ControlButton name="logout"/></a>:
         <a href="http://localhost:3001/auth/google"><ControlButton name="login"/></a> 
       } 
       <ControlButton active name="dashboard"/>
       <ControlButton name="settings"/>
+      <ControlButton name="home"/>
     </Bar>
     )}
     </AppContext.Consumer>
+    
   );
 }

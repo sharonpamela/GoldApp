@@ -1,13 +1,21 @@
 - 
-- TODO:
-- render condition buy/sell buttons for 5 coins
-- logic for balance and inventory
--  make landing page
--  return "error not found" if user is NOT logged (don't display dasboard or the settings pages if user is NOT logged in)
-- have away for user to know which ones they own (disabled tile and put in favorites if they own them)
-- show the amount of coins owned (show below buy/sell if they own the coin then show how many they currently have, if they don't own, don't render the sell button)
+- TODO sharon:
 - Landing page: login button and a show clean tiles
-- if the user doesn't want to log in then just show the pages with no buy/sell and no balance, and no owned coins
+- Add Continue as guess button in login page
+- Silver theme
+- Amount of coins owned: force into favorites with disabled tile
+- show the amount of that particular coin owned in coinspolight
+- change the selected tile's shadow in top selection to more visible color
+- DONT render buy sell butons if not logged in
+- Disable buy buton if you don't own the coin  
+- change cryptodash references to Gold
+- add bitcoin news scraper?
+
+- TODO Amy
+- logic for balance and inventory
+- logic for render condition buy/sell buttons:
+  - Buy: balance > 0 && coin is in fav 5
+  - Sell: if amount owned by user > 0 (update balance with profit)
 
 
 DONZO:

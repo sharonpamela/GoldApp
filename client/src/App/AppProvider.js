@@ -4,7 +4,6 @@ import moment from 'moment';
 import axios from 'axios';
 import API from "../utils/API";
 
-
 const cc = require('cryptocompare');
 export const AppContext = React.createContext();
 
@@ -15,13 +14,14 @@ export class AppProvider extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      page: 'dashboard',
+      page:'landing',
       user: undefined,
       balance:0,
       favorites: ['BTC','ETH'],
       timeInterval: 'months',
       ...this.savedSettings(),
       setPage: this.setPage,
+      pageTheme:'dark',
       addCoin: this.addCoin,
       removeCoin: this.removeCoin,
       isInFavorites: this.isInFavorites,
@@ -38,8 +38,7 @@ export class AppProvider extends React.Component {
     this.fetchCoins();
     this.fetchPrices();
     this.fetchHistorical();
-    this.fetchUser();
-    
+    this.fetchUser(); 
   }
 
   fetchCoins = async () => {
@@ -49,6 +48,7 @@ export class AppProvider extends React.Component {
 
   fetchUser = async () => {
     let user = await axios.get('/api/current_user')
+    console.log(user.data)
     this.setState( {user : user.data} );
   }
 
@@ -200,5 +200,4 @@ export class AppProvider extends React.Component {
       </AppContext.Provider>
     )
   }
-
 }

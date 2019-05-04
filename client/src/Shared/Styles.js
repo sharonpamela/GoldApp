@@ -1,5 +1,19 @@
-const theme = 'dark';
-//const theme = 'light';
+import React from 'react';
+import {AppContext} from "../App/AppProvider";
+
+var theme;
+
+export default function () {
+  return (
+    <AppContext.Consumer>
+      {({pageTheme}) =>
+          {theme = pageTheme}
+      }
+    </AppContext.Consumer>
+  );
+};
+// const theme = 'dark';
+// const theme = 'light';
 export const lightTheme = theme === 'light';
 
 export const color = lightTheme ? 'white' : 'black';  // tiles in grids 
