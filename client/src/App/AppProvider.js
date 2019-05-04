@@ -163,25 +163,30 @@ export class AppProvider extends React.Component {
       if (price[this.state.currentFavorite]) {
         const sym = price[this.state.currentFavorite].USD.FROMSYMBOL;
         const own = this.state.user.owned;
-        for (let i = 0; i < own.length; i++) {
-          if (own[i].CoinName === sym) {
-            own[i].amount++;
-          }
-        }
-        console.log(own, "own");
-        const response = await API.buyButton({
-          price: price[this.state.currentFavorite].USD.PRICE,
-          balance: this.state.user.balance,
-          googleId: this.state.user.googleId,
-          owned: own,
-        });
-        console.log(response.data.balance, "response")
-        this.fetchUser();
-        const numberFormat = number => {
-          return +(number + '').slice(0, 7);
-        }
 
-        this.setState({ balance: numberFormat(response.data.balance) })
+        if (price[this.state.currentFavorite].USD.PRICE < this.state.user.balance) {
+          console.log(" cash bro")
+
+          for (let i = 0; i < own.length; i++) {
+            if (own[i].CoinName === sym) {
+              own[i].amount++;
+            }
+          }
+          console.log(own, "own");
+          const response = await API.buyButton({
+            price: price[this.state.currentFavorite].USD.PRICE,
+            balance: this.state.user.balance,
+            googleId: this.state.user.googleId,
+            owned: own,
+          });
+          console.log(response.data.balance, "response")
+          this.fetchUser();
+          const numberFormat = number => {
+            return +(number + '').slice(0, 7);
+          }
+
+          this.setState({ balance: numberFormat(response.data.balance) })
+        }
       }
     })
   };
