@@ -55,20 +55,25 @@ module.exports = {
 
   buyButton: function (req, res) {
     console.log(req.body, "buy");
+    var own = req.body.owned;
     var newBal = req.body.balance - req.body.price;
     User
       .findOneAndUpdate( req.body.googleId, {balance: newBal})
-      .then(dbModel => {console.log(dbModel), res.json(dbModel)})
+      .findOneAndUpdate( req.body.googleId, { owned : own })
+     .then(dbModel => {console.log(dbModel, "model"), res.json(dbModel)})
       .catch(err => res.status(422).json(err));
   },
 
   sellButton: function (req, res) {
     console.log(req.body, "sell");
+    var own = req.body.owned;
     var newBal = req.body.balance + req.body.price;
-    db.User
-      .findOneAndUpdate({ user_id: 22 }, { balance: newBal })
-      .then(dbModel => res.json(dbModel))
+    console.log(req.body.price, "price", newBal);
+    User
+      .findOneAndUpdate( req.body.googleId, {balance: newBal})
+      .findOneAndUpdate( req.body.googleId, { owned : own })
+     .then(dbModel => {console.log(dbModel, "model"), res.json(dbModel)})
       .catch(err => res.status(422).json(err));
-  }
+  },
 
 };
