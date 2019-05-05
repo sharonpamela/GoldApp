@@ -31,8 +31,8 @@ export const greenBackgroundColor = `background-color: ${color3};`;
 
 export const fontColorGreen = `color: #03A9F4`;  // unknown effect, not a green color 
 export const fontColorWhite = `color: white`;
-export const subtleBoxShadow = `box-shadow: 0px 0px 5px 1px ${lightTheme ? '#a9b6ff' : 'yellow'}`;  // shadow on tiles, 
-export const greenBoxShadow = `box-shadow: 0px 0px 4px 2px #DAA520`;  // hoover shadow 
+export const subtleBoxShadow = `box-shadow: 0px 0px 5px 1px ${lightTheme ? '#a9b6ff' : '#725700'}`;  // shadow on tiles, 
+export const greenBoxShadow = `box-shadow: 0px 0px 4px 2px #aa5b00`;  // hoover and selected shadow 
 export const redBoxShadow = `box-shadow: 0px 0px 2px 2px #DAA520`; // changed to gold from red
 
 export const fontSizeBig = 'font-size: 2em';
