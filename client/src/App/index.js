@@ -7,7 +7,6 @@ import {AppProvider} from './AppProvider';
 import {AppContext} from "../App/AppProvider";
 import Settings from '../Settings';
 import Dashboard from '../Dashboard';
-import Landing from '../Landing';
 import Content from '../Shared/Content';
 
 class App extends Component {
@@ -25,8 +24,7 @@ class App extends Component {
           <Content>
             <Settings />
             <Dashboard />
-            <Landing />
-          </Content>
+            </Content>
           <WalletBar/>
         </AppProvider>
       </AppLayout>
