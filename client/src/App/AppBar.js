@@ -53,10 +53,6 @@ export default function(){
     {({user}) => (
     <Bar>
       <Logo> Gold </Logo>
-      { user ? 
-        <Balance>Balance: ${user.balance}</Balance> :
-        <h3>Hello!</h3>
-      }
       
       { user ? 
         <a href="http://localhost:3001/api/logout"><ControlButton name="logout"/></a>:

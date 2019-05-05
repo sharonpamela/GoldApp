@@ -19,13 +19,16 @@ export class AppProvider extends React.Component {
       page: 'dashboard',
       user: undefined,
       balance: 0,
-      favorites: ['BTC', 'ETH'],
+      owned: [],
+      favorites: ['ZEC', 'ETH', 'ETC', '300', 'LTC'],
+      store: ['LTC', '300', 'ETH', 'ETC', 'ZEC'],
       timeInterval: 'months',
       ...this.savedSettings(),
       setPage: this.setPage,
       addCoin: this.addCoin,
       removeCoin: this.removeCoin,
       isInFavorites: this.isInFavorites,
+      isInStore: this.isInStore,
       confirmFavorites: this.confirmFavorites,
       setCurrentFavorite: this.setCurrentFavorite,
       setFilteredCoins: this.setFilteredCoins,
@@ -118,6 +121,8 @@ export class AppProvider extends React.Component {
 
   isInFavorites = key => _.includes(this.state.favorites, key)
 
+  isInStore = key => _.includes(this.state.store, key)
+
   confirmFavorites = () => {
     let currentFavorite = this.state.favorites[0];
     this.setState({
@@ -208,13 +213,14 @@ export class AppProvider extends React.Component {
               owned: own,
             });
 
-            console.log(response.data.balance, "response")
+            console.log(response.data, "response")
             this.fetchUser();
             const numberFormat = number => {
               return +(number + '').slice(0, 7);
             }
 
             this.setState({ balance: numberFormat(response.data.balance) })
+            // this.setState({owned: response.data.owned})
           }
         }
       }
