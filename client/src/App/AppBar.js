@@ -50,15 +50,16 @@ export default function(){
     {({user}) => (
     <Bar>
       <Logo> Gold </Logo>
-      
       { user ? 
         <a href="http://localhost:3001/api/logout"><ControlButton name="logout"/></a>:
         <a href="http://localhost:3001/auth/google"><ControlButton name="login"/></a> 
       } 
       <ControlButton active name="dashboard"/>
       <ControlButton name="settings"/>
+      <ControlButton name="home"/>
     </Bar>
     )}
     </AppContext.Consumer>
+    
   );
 }

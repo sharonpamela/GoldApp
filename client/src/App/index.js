@@ -4,8 +4,10 @@ import AppLayout from './AppLayout';
 import AppBar from './AppBar';
 import WalletBar from './WalletBar';
 import {AppProvider} from './AppProvider';
+import {AppContext} from "../App/AppProvider";
 import Settings from '../Settings';
 import Dashboard from '../Dashboard';
+import Landing from '../Landing';
 import Content from '../Shared/Content';
 
 class App extends Component {
@@ -13,10 +15,17 @@ class App extends Component {
     return (
       <AppLayout>
         <AppProvider>
+        <AppContext.Consumer>
+          {({page}) => (
+          page === 'landing' ?
+          null:
           <AppBar/>
+          )}
+        </AppContext.Consumer>
           <Content>
             <Settings />
             <Dashboard />
+            <Landing />
           </Content>
           <WalletBar/>
         </AppProvider>

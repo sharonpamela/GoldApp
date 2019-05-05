@@ -5,7 +5,6 @@ import axios from 'axios';
 import API from "../utils/API";
 // import { set } from 'mongoose';
 
-
 const cc = require('cryptocompare');
 export const AppContext = React.createContext();
 
@@ -25,6 +24,7 @@ export class AppProvider extends React.Component {
       timeInterval: 'months',
       ...this.savedSettings(),
       setPage: this.setPage,
+      pageTheme:'dark',
       addCoin: this.addCoin,
       removeCoin: this.removeCoin,
       isInFavorites: this.isInFavorites,
@@ -42,7 +42,7 @@ export class AppProvider extends React.Component {
     this.fetchCoins();
     this.fetchPrices();
     this.fetchHistorical();
-    this.fetchUser();
+    this.fetchUser(); 
 
   }
 
@@ -246,5 +246,4 @@ export class AppProvider extends React.Component {
       </AppContext.Provider>
     )
   }
-
 }
