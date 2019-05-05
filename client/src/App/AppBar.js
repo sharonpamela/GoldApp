@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import {AppContext} from "./AppProvider";
 
 const Logo = styled.div`
@@ -13,9 +13,6 @@ const Bar = styled.div`
   background-color:black;
 `
 
-const Balance = styled.div`
-  font-size: 2em;
-`
 
 const ControlButtonElem = styled.div`
   cursor: pointer; 
@@ -52,11 +49,7 @@ export default function(){
     <AppContext.Consumer>
     {({user}) => (
     <Bar>
-      <Logo>Gold</Logo>
-      { user ? 
-        <Balance>Balance: ${user.balance}</Balance> :
-        <h3>Hello!</h3>
-      }
+      <Logo> Gold </Logo>
       { user ? 
         <a href="http://localhost:3001/api/logout"><ControlButton name="logout"/></a>:
         <a href="http://localhost:3001/auth/google"><ControlButton name="login"/></a> 
