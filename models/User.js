@@ -6,13 +6,15 @@ const userSchema = new Schema({
   balance: { type: Number, default: 300 },
   favorites: String,
   price: Number,
-  owned: { type: Array, 
+  owned: {
+    type: Array,
     default: [
-      {coinName:'LTC', amount:0}, 
-      {coinName:'300', amount:0}, 
-      {coinName:'ETC', amount:0}, 
-      {coinName:'ETH', amount:0}, 
-      {coinName:'ZEC', amount:0}] },
-});
+      { CoinName: 'LTC', amount: 0 },
+      { CoinName: '300', amount: 0 },
+      { CoinName: 'ETH', amount: 0 },
+      { CoinName: 'ETC', amount: 0 },
+      { CoinName: 'ZEC', amount: 0 }]
+  }}
+  );
 
 mongoose.model('users', userSchema);
