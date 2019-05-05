@@ -17,7 +17,7 @@ export class AppProvider extends React.Component {
     super(props);
     this.state = {
       page: 'dashboard',
-      user: undefined,
+      user: false,
       balance: 0,
       owned: [],
       favorites: ['ZEC', 'ETH', 'ETC', '300', 'LTC'],
