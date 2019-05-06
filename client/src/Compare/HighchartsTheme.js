@@ -9,7 +9,9 @@ export default {
     '#08C6E0',
     '#146B9E',
     '#F376C1',
-    '#1B2839'
+    '#1B2839',
+    "#brown",
+    "#white"
   ],
   chart: {
     backgroundColor: lightTheme ? 'white' : 'black',// box around the graph, behind axis text
