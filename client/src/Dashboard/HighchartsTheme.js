@@ -2,7 +2,7 @@ import {lightTheme} from "../Shared/Styles";
 
 export default {
   colors: [
-    '#61d936',
+    'purple',
     '#552ccb',
     '#1163c9',
     '#04A1EE',

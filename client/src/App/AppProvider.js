@@ -27,6 +27,7 @@ export class AppProvider extends React.Component {
       ...this.savedSettings(),
       setPage: this.setPage,
       pageTheme: 'dark',
+      setTheme: this.setTheme,
       addCoin: this.addCoin,
       removeCoin: this.removeCoin,
       isInFavorites: this.isInFavorites,
@@ -39,7 +40,8 @@ export class AppProvider extends React.Component {
       setFilteredCoins: this.setFilteredCoins,
       changeChartSelect: this.changeChartSelect,
       buyButton: this.buyButton,
-      sellButton: this.sellButton
+      sellButton: this.sellButton,
+      changeTheme: this.changeTheme
     }
   }
 
@@ -48,9 +50,6 @@ export class AppProvider extends React.Component {
     this.fetchPrices();
     this.fetchHistorical();
     this.fetchUser();
-    this.fetchCompareHistorical();
-
-  }
 
   fetchCoins = async () => {
     let coinList = (await cc.coinList()).Data;
@@ -210,6 +209,22 @@ export class AppProvider extends React.Component {
 
   isInStore = key => _.includes(this.state.store, key)
 
+  changeTheme = () => {
+    console.log("change theme fired")
+    console.log(this.state.pageTheme, "page theme state")
+     if (this.state.pageTheme === 'dark') {
+       this.setState({
+         pageTheme: 'light'
+       })
+     }
+    else {
+       this.setState({
+         pageTheme: 'dark'
+       })
+     }
+  }
+
+
   confirmFavorites = () => {
     let currentFavorite = this.state.favorites[0];
     this.setState({
@@ -316,6 +331,8 @@ export class AppProvider extends React.Component {
   };
 
   setPage = page => this.setState({ page })
+
+  setTheme = theme => this.setState({ theme })
 
   setFilteredCoins = (filteredCoins) => this.setState({ filteredCoins })
 

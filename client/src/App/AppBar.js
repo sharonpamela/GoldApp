@@ -4,17 +4,24 @@ import {AppContext} from "./AppProvider";
 
 const Logo = styled.div`
   font-size: 1.5em; 
+  padding-left: 10px;
 `
-
+const Login = styled.div`
+  font-size: 1em;
+  text-align: center;
+  margin: auto;
+  `
+  
 const Bar = styled.div`
   display: grid; 
   margin-bottom: 40px; 
-  grid-template-columns: 180px 1fr 1fr 100px 100px; 
+  grid-template-columns: 180px 1fr 100px 100px; 
   background-color:black;
 `
 
 
 const ControlButtonElem = styled.div`
+  margin: auto;
   cursor: pointer; 
   ${props => props.active && css`
     text-shadow: 0px 0px 60px #03ff03;
@@ -44,6 +51,9 @@ function ControlButton({name}){
   )
 }
 
+// function login(){
+//   <h1> Click me </h1>
+// }
 export default function(){
   return (
     <AppContext.Consumer>
@@ -51,8 +61,8 @@ export default function(){
     <Bar>
       <Logo> Gold </Logo>
       { user ? 
-        <a href="http://localhost:3001/api/logout"><ControlButton name="logout"/></a>:
-        <a href="http://localhost:3001/auth/google"><ControlButton name="login"/></a> 
+        <Login> <a href="http://localhost:3001/api/logout"><ControlButton name="logout"/></a></Login>:
+        <Login> <a href="http://localhost:3001/auth/google"><ControlButton name="login"/></a> </Login>
       } 
       <ControlButton active name="dashboard"/>
       <ControlButton name="settings"/>

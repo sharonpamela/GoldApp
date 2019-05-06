@@ -13,12 +13,12 @@ const SpotlightName = styled.h2`
 export default function (){
   return (
     <AppContext.Consumer>
-      {({currentFavorite, coinList}) =>
+      {({currentFavorite, coinList, user, isInStore}) =>
         <Tile>
           <SpotlightName> {coinList[currentFavorite].CoinName} </SpotlightName>
           <CoinImage spotlight coin={coinList[currentFavorite]}/>
-          <Buybutton/>
-          <Sellbutton/>
+          { (user && isInStore(coinList[currentFavorite].Name)) ? <Buybutton/> : null }
+          { (user && isInStore(coinList[currentFavorite].Name)) ? <Sellbutton/> : null }
         </Tile>
       }
     </AppContext.Consumer>

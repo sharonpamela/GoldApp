@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import {AppContext} from "../App/AppProvider";
-import {fontSize1, greenBoxShadow, color3} from "../Shared/Styles";
+import {fontSize1, greenBoxShadow, color3, subtleBoxShadow, lightBlueBackground} from "../Shared/Styles";
 
 const ConfirmButtonStyled = styled.div`
+  ${lightBlueBackground}
+  ${subtleBoxShadow}
+  opacity: 0.8;
   margin: 20px;
   color: ${color3}
   ${fontSize1} 
