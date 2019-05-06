@@ -1,4 +1,5 @@
-export default function (historical) {
+export default function (arrayOfSeriesDataSets) {
+  console.log("datasets from highcharts config", arrayOfSeriesDataSets)
   return {
     title: {
       text: ''
@@ -25,7 +26,7 @@ export default function (historical) {
       }
     },
 
-    series: historical,
+    series: arrayOfSeriesDataSets,
 
     responsive: {
       rules: [{

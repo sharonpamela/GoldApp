@@ -21,9 +21,9 @@ export const CenterDiv = styled.div`
 
 export default function () {
   return <AppContext.Consumer>
-    {({confirmFavorites}) =>
+    {({compareSelected}) =>
       <CenterDiv>
-        <CompareButtonStyled onClick={confirmFavorites}>
+        <CompareButtonStyled onClick={compareSelected}>
           Compare
         </CompareButtonStyled>
       </CenterDiv>

@@ -1,4 +1,6 @@
 export default function (historical) {
+  console.log(historical)
+  
   return {
     title: {
       text: ''
