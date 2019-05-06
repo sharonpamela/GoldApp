@@ -3,7 +3,6 @@ import _ from 'lodash';
 import moment from 'moment';
 import axios from 'axios';
 import API from "../utils/API";
-// import { set } from 'mongoose';
 
 const cc = require('cryptocompare');
 export const AppContext = React.createContext();
@@ -44,29 +43,25 @@ export class AppProvider extends React.Component {
       changeTheme: this.changeTheme
     }
   }
-
   componentDidMount = () => {
     this.fetchCoins();
     this.fetchPrices();
     this.fetchHistorical();
     this.fetchUser();
-
+  }
   fetchCoins = async () => {
     let coinList = (await cc.coinList()).Data;
     this.setState({ coinList });
   }
-
   fetchUser = async () => {
     let user = await axios.get('/api/current_user')
     this.setState({ user: user.data });
   }
-
   fetchPrices = async () => {
     if (this.state.firstVisit) return;
     let prices = await this.prices();
     this.setState({ prices });
   }
-
   prices = async () => {
     let returnData = [];
     for (let i = 0; i < this.state.favorites.length; i++) {
@@ -93,7 +88,6 @@ export class AppProvider extends React.Component {
     ]
     this.setState({ historical });
   }
-
   historical = () => {
     let promises = [];
     for (let units = TIME_UNITS; units > 0; units--) {
@@ -109,10 +103,8 @@ export class AppProvider extends React.Component {
     // if (this.state.page != "compare") return;
     let favs = this.state.favorites;
     let arrayOfResultObjs =[]
-
     // call historical for each object in the favs array
     // store the data as an object in the arrayOfResults
-
     for (let i=0 ; i< favs.length ; i++){
       let results = await this.compareHistorical(favs[i]);
       let historical =
@@ -128,7 +120,6 @@ export class AppProvider extends React.Component {
     }
     this.setState({ arrayOfSeriesDataSets:arrayOfResultObjs });
   }
-
   compareHistorical = (coin) => {
     let promises = [];
     for (let units = TIME_UNITS; units > 0; units--) {
@@ -139,13 +130,11 @@ export class AppProvider extends React.Component {
     }
     return Promise.all(promises);
   }
-
   fetchCompareHistorical2 = async () => {
     if (this.state.firstVisit) return;
     let arrayOfSeriesDataSets = await this.compareHistorical();
     this.setState({ arrayOfSeriesDataSets });
   }
-
   compareHistorical2 = () => {
     let promises = [];
     let favs = this.state.favorites;
@@ -173,8 +162,6 @@ export class AppProvider extends React.Component {
     }
     return arrayOfSeries;
   }
-
-
   addCoin = key => {
     let favorites = [...this.state.favorites];
     if (favorites.length < MAX_FAVORITES) {
@@ -182,33 +169,26 @@ export class AppProvider extends React.Component {
       this.setState({ favorites });
     }
   }
-
   removeCoin = key => {
     let favorites = [...this.state.favorites];
     // pull returns a new array with that value removed
     this.setState({ favorites: _.pull(favorites, key) })
   }
-
   addSelectedCoin = key => {
     let selected = [...this.state.selectedForCompare];
     selected.push(key);
     this.setState({ selectedForCompare: selected });
   }
-
   removeSelectedCoin = key => {
     let selected = [...this.state.selectedForCompare];
     // pull returns a new array with that value removed
     this.setState({ selectedForCompare: _.pull(selected, key) })
   }
-
   isInFavorites = key => _.includes(this.state.favorites, key)
-
   isInCompareList = key => {
     _.includes(this.state.selectedForCompare, key)
   }
-
   isInStore = key => _.includes(this.state.store, key)
-
   changeTheme = () => {
     console.log("change theme fired")
     console.log(this.state.pageTheme, "page theme state")
@@ -223,8 +203,6 @@ export class AppProvider extends React.Component {
        })
      }
   }
-
-
   confirmFavorites = () => {
     let currentFavorite = this.state.favorites[0];
     this.setState({
@@ -242,27 +220,22 @@ export class AppProvider extends React.Component {
       currentFavorite
     }));
   }
-
   compareSelected = () => {
     this.setState(() => {
       this.fetchPrices();
       this.fetchCompareHistorical();
     });
-
   }
-
   setCurrentFavorite = (sym) => {
     this.setState({
       currentFavorite: sym,
       historical: null
     }, this.fetchHistorical);
-
     localStorage.setItem('cryptoDash', JSON.stringify({
       ...JSON.parse(localStorage.getItem('cryptoDash')),
       currentFavorite: sym
     }))
   }
-
   savedSettings() {
     let cryptoDashData = JSON.parse(localStorage.getItem('cryptoDash'));
     if (!cryptoDashData) {
@@ -271,15 +244,12 @@ export class AppProvider extends React.Component {
     let { favorites, currentFavorite } = cryptoDashData;
     return { favorites, currentFavorite };
   }
-
   buyButton = async (currentFavorite) => {
     this.state.prices.forEach(async price => {
       if (price[this.state.currentFavorite]) {
         const sym = price[this.state.currentFavorite].USD.FROMSYMBOL;
         const own = this.state.user.owned;
-
         if (price[this.state.currentFavorite].USD.PRICE < this.state.user.balance) {
-
           for (let i = 0; i < own.length; i++) {
             if (own[i].CoinName === sym) {
               own[i].amount++;
@@ -295,13 +265,11 @@ export class AppProvider extends React.Component {
           const numberFormat = number => {
             return +(number + '').slice(0, 7);
           }
-
           this.setState({ balance: numberFormat(response.data.balance) })
         }
       }
     })
   };
-
   sellButton = async (currentFavorite) => {
     this.state.prices.forEach(async price => {
       if (price[this.state.currentFavorite]) {
@@ -316,12 +284,10 @@ export class AppProvider extends React.Component {
               googleId: this.state.user.googleId,
               owned: own,
             });
-
             this.fetchUser();
             const numberFormat = number => {
               return +(number + '').slice(0, 7);
             }
-
             this.setState({ balance: numberFormat(response.data.balance) })
             // this.setState({owned: response.data.owned})
           }
@@ -329,17 +295,12 @@ export class AppProvider extends React.Component {
       }
     })
   };
-
   setPage = page => this.setState({ page })
-
   setTheme = theme => this.setState({ theme })
-
   setFilteredCoins = (filteredCoins) => this.setState({ filteredCoins })
-
   changeChartSelect = (value) => {
     this.setState({ timeInterval: value, historical: null }, this.fetchHistorical);
   }
-
   render() {
     // console.log(this.state.user);
     return (

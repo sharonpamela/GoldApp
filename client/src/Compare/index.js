@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Page from '../Shared/Page';
 import PriceGrid from './PriceGrid';
 import PriceChart from './PriceChart';
-import CompareButton from './CompareButton';
 import SelectedCoins from './SelectedCoins';
 
 const ChartGrid = styled.div`

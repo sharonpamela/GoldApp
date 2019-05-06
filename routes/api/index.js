@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const usersController = require("../../Controllers/usersController");
-// we're inside /api
 
+// we're inside /api
 router.route('/')
     .get(usersController.findAll)
     .post(usersController.create);
@@ -18,6 +18,5 @@ router.route('/user_bal')
 router.get('/current_user', (req, res) => {
     res.send(req.user);
 });
-
 
 module.exports = router;

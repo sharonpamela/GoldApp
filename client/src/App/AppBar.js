@@ -6,11 +6,11 @@ const Logo = styled.div`
   font-size: 1.5em; 
   padding-left: 10px;
 `
-const Login = styled.div`
-  font-size: 1em;
-  text-align: center;
-  margin: auto;
-  `
+// const Login = styled.div`
+//   font-size: 1em;
+//   text-align: center;
+//   margin: auto;
+//   `
   
 const Bar = styled.div`
   display: grid; 
@@ -61,8 +61,8 @@ export default function(){
     <Bar>
       <Logo> Gold </Logo>
       { user ? 
-        <Login> <a href="http://localhost:3001/api/logout"><ControlButton name="logout"/></a></Login>:
-        <Login> <a href="http://localhost:3001/auth/google"><ControlButton name="login"/></a> </Login>
+        <a href="http://localhost:3001/api/logout"><ControlButton name="logout"/></a>:
+        <a href="http://localhost:3001/auth/google"><ControlButton name="login"/></a>
       } 
       <ControlButton active name="dashboard"/>
       <ControlButton name="settings"/>
