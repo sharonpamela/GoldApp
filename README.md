@@ -18,6 +18,7 @@ This app is currently hosted at: https://powerful-woodland-79930.herokuapp.com/
 #### Front end
 - React Context: allows sharing values between components without having to explicitly pass props
 - cryptocompare: API for real time crypcurrency information
+- CSS Grid
 - fuzzy: for searching within the app
 - http-proxy-middleware: proxy for multiple different routes
 - lodash: for performance
