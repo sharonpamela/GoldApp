@@ -4,6 +4,7 @@ import Page from '../Shared/Page';
 import PriceGrid from './PriceGrid';
 import PriceChart from './PriceChart';
 import CompareButton from './CompareButton';
+import SelectedCoins from './SelectedCoins';
 
 const ChartGrid = styled.div`
   display: grid; 
@@ -11,7 +12,7 @@ const ChartGrid = styled.div`
   grid-gap: 15px; 
   grid-template-columns: 1fr; 
 `
-const DivStyle = styled.div`
+const SelectionStyle = styled.div`
   display: grid; 
   padding: 20px; 
   grid-template-columns: 1fr; 
@@ -21,14 +22,13 @@ const DivStyle = styled.div`
 
 export default function(){
   return <Page name="compare">
-    <DivStyle>
-      Select the coins you wish to compare:
+    <SelectionStyle>
+      <SelectedCoins/>
       <PriceGrid/>
       <CompareButton />
-    </DivStyle>
+    </SelectionStyle>
     <ChartGrid>
       <PriceChart/>
     </ChartGrid>
-    
   </Page>
 }

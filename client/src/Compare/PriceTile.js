@@ -1,33 +1,26 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
-import {SelectableTile} from "../Shared/Tile";
-import {fontSize3, fontSizeBig, greenBoxShadow} from "../Shared/Styles";
-import {CoinHeaderGridStyled} from "../Settings/CoinHeaderGrid";
-import {AppContext} from "../App/AppProvider";
+import styled, { css } from 'styled-components';
+import { SelectableTile } from "../Shared/Tile";
+import { fontSize3, fontSizeBig, greenBoxShadow } from "../Shared/Styles";
+import { AppContext } from "../App/AppProvider";
 
 const JustifyRight = styled.div`
   justify-self: right; 
 `
+const CoinHeaderGridStyle = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`;
 
-const JustifyLeft = styled.div`
-  justify-self: left; 
-`
-
-const TickerPrice = styled.div`
+const TickerPriceStyle = styled.div`
   ${fontSizeBig};
 `
-
-const ChangePct = styled.div`
+const ChangePctStyle = styled.div`
   color: green; 
   ${props => props.red && css`
     color: red; 
   `}
 `
-
-const numberFormat = number => {
-  return +(number + '').slice(0, 7);
-}
-
 const PriceTileStyled = styled(SelectableTile)`
   ${props => props.compact && css`
     display: grid; 
@@ -43,57 +36,76 @@ const PriceTileStyled = styled(SelectableTile)`
   `}
 `
 
-function ChangePercent({data}){
+const numberFormat = number => {
+  return +(number + '').slice(0, 7);
+}
+
+function ChangePercent({ data }) {
   return (
     <JustifyRight>
-      <ChangePct red={data.CHANGEPCT24HOUR < 0}>
+      <ChangePctStyle red={data.CHANGEPCT24HOUR < 0}>
         {numberFormat(data.CHANGEPCT24HOUR)}%
-      </ChangePct>
+      </ChangePctStyle>
     </JustifyRight>
   );
 }
 
-function PriceTile({sym, data, currentFavorite, setCurrentFavorite}){
-  return (
-    <PriceTileStyled onClick={setCurrentFavorite} currentFavorite={currentFavorite}>
-      <CoinHeaderGridStyled>
-        <div> {sym} </div>
-        <ChangePercent data={data}/>
-      </CoinHeaderGridStyled>
-      <TickerPrice>
-        ${numberFormat(data.PRICE)}
-      </TickerPrice>
-    </PriceTileStyled>
-  );
+function clickCoinHandler(sym, coinKey, addSelectedCoin, removeSelectedCoin, isInCompareList) {
+
+  
+  console.log(coinKey, "coinKey");
+
+  if(isInCompareList(coinKey)){
+    return removeSelectedCoin(coinKey)
+  } else {
+    return addSelectedCoin(coinKey)
+  }
+  // console.log(selectedForCompare, "selectedForCompare");
+  // console.log(sym, "sym");
+  // return addSelectedCoin(sym);
+
+  // for (let i = 0 ; i < selectedForCompare; i++){
+  //   if (selectedForCompare[i] === sym)
+  //     //return addSelectedCoin(sym);
+  //     console.log("found a match")
+  // }
+  // let isInCompare = true;
+  // return isInCompare ? () => {
+  //   
+  // } : () => {
+  //   addSelectedCoin(coinKey)
+  // }
 }
 
-function PriceTileCompact({sym, data, currentFavorite, setCurrentFavorite}){
-  return (
-    <PriceTileStyled onClick={setCurrentFavorite} compact currentFavorite={currentFavorite}>
-      <JustifyLeft> {sym} </JustifyLeft>
-      <ChangePercent data={data}/>
-      <div>
-        ${numberFormat(data.PRICE)}
-      </div>
-    </PriceTileStyled>
-  );
-}
-
-export default function({price, index}){
+export default function ({ price, index }) {
   let sym = Object.keys(price)[0];
   let data = price[sym]['USD'];
-  let TileClass = index < 5 ? PriceTile : PriceTileCompact;
+
   return (
     <AppContext.Consumer>
-      {({currentFavorite, setCurrentFavorite}) =>
-        <TileClass
-          sym={sym}
-          data={data}
-          currentFavorite={currentFavorite === sym}
-          setCurrentFavorite={() => setCurrentFavorite(sym)}
-        >
-        </TileClass>
+      {({ isInCompareList, selectedForCompare, addSelectedCoin, removeSelectedCoin }) =>
+        <PriceTileStyled onClick={clickCoinHandler(sym, index, addSelectedCoin, removeSelectedCoin, isInCompareList)}>
+          <CoinHeaderGridStyle>
+            <div> {sym} </div>
+            <div>{index} </div>
+            <ChangePercent data={data} />
+          </CoinHeaderGridStyle>
+          <TickerPriceStyle>
+            ${numberFormat(data.PRICE)}
+          </TickerPriceStyle>
+        </PriceTileStyled>
       }
     </AppContext.Consumer>
   )
 }
+        // <PriceTile
+          // sym={sym}
+          // data={data}
+          // selectedForCompare = {selectedForCompare}
+          // // currentFavorite={currentFavorite === sym}
+          // coinKey={index}
+          // // setCurrentFavorite={() => setCurrentFavorite(sym)}
+          // addSelectedCoin= {() => addSelectedCoin(index)}
+          // removeSelectedCoin= {() => removeSelectedCoin (index)}
+        // >
+        // </PriceTile>

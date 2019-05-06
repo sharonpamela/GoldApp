@@ -14,10 +14,6 @@ const Balance = styled.div`
   font-size: 1.5em;
 `
 
-
-
-
-
 export default function () {
   // return (<AppContext.Consumer>({ user }) =>{user ? <Bar>Balance: ${user.owned[0].CoinName}</Bar> : null }</AppContext.Consumer>);
     return (    <AppContext.Consumer>

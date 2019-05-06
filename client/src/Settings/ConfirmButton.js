@@ -13,7 +13,6 @@ const ConfirmButtonStyled = styled.div`
     ${greenBoxShadow} 
   }
 `
-
 export const CenterDiv = styled.div`
   display: grid;
   justify-content: center;
