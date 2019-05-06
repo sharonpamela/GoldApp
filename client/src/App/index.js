@@ -24,7 +24,6 @@ class App extends Component {
             <Settings />
             <Dashboard />
             </Content>
-            <h1> Test </h1>
         </AppProvider>
       </AppLayout>
     );

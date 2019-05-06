@@ -6,3 +6,12 @@ body {
     background-repeat: repeat; 
     background-size: 100%;
 }
+
+a{
+    font-size: 1em;
+    text-align: center;
+    margin: auto;
+    text-decoration: none;
+    color: gold;
+  
+}

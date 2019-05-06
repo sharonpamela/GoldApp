@@ -7,7 +7,8 @@ export default function () {
   return (
     <AppContext.Consumer>
       {({pageTheme}) =>
-          {theme = pageTheme}
+          { console.log(pageTheme, "pagetheme")
+            theme = pageTheme}
       }
     </AppContext.Consumer>
   );

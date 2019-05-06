@@ -1,19 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import {backgroundColor2, fontSize2} from "../Shared/Styles";
+import {backgroundColor2, fontSize2, subtleBoxShadow, lightBlueBackground} from "../Shared/Styles";
 import {AppContext} from "../App/AppProvider";
 import _ from 'lodash';
 import fuzzy from 'fuzzy';
+import Theme from './Theme'
 
 const SearchGrid = styled.div`
   display: grid; 
-  grid-template-columns: 200px 1fr; 
+  grid-template-columns: 200px 1fr 1fr ; 
+  ${lightBlueBackground}
+  ${subtleBoxShadow}
+  opacity: 0.8;
+
 `
 
 const SearchInput = styled.input`
   ${backgroundColor2}
   ${fontSize2}
-  border: 1px solid; 
+  border: 1px solid purple; 
   height: 25px; 
   color: #1163c9;
   place-self: center left; 
@@ -52,6 +57,7 @@ export default function(){
         <SearchGrid>
           <h2>Search all coins</h2>
           <SearchInput onKeyUp={(e) => filterCoins(e, setFilteredCoins, coinList)}/>
+          <Theme />
         </SearchGrid>
       }
     </AppContext.Consumer>
