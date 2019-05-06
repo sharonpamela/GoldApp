@@ -1,6 +1,6 @@
 import React from 'react';
 import {AppContext} from "../App/AppProvider";
-import {SelectableTile, DisabledTile, DeletableTile} from "../Shared/Tile";
+import {SelectableTile, DisabledTile, DeletableTile, StoreTile} from "../Shared/Tile";
 import CoinHeaderGrid from './CoinHeaderGrid';
 import CoinImage from '../Shared/CoinImage';
 
@@ -19,7 +19,10 @@ export default function({coinKey, topSection}){
 
       let TileClass = SelectableTile;
       if(isInStore(coinKey) || isInFavorites(coinKey)){
-        TileClass = DisabledTile
+        TileClass = StoreTile;
+      }
+      if (!topSection && isInFavorites(coinKey)){
+        TileClass = DisabledTile;
       }
       if(topSection && !isInStore(coinKey)){
         TileClass = DeletableTile;

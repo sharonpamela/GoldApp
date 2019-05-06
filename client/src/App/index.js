@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import AppLayout from './AppLayout';
 import AppBar from './AppBar';
-import WalletBar from './WalletBar';
 import {AppProvider} from './AppProvider';
 import {AppContext} from "../App/AppProvider";
 import Settings from '../Settings';
@@ -25,7 +24,7 @@ class App extends Component {
             <Settings />
             <Dashboard />
             </Content>
-          <WalletBar/>
+            <h1> Test </h1>
         </AppProvider>
       </AppLayout>
     );
