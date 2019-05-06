@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { SelectableTile } from "../Shared/Tile";
-import { fontSize3, fontSizeBig, greenBoxShadow } from "../Shared/Styles";
+import { lightBlueBackground, fontSize3, fontSizeBig, greenBoxShadow } from "../Shared/Styles";
 import { AppContext } from "../App/AppProvider";
 
 const JustifyRight = styled.div`
@@ -25,6 +25,7 @@ const PriceTileStyled = styled(SelectableTile)`
   ${props => props.compact && css`
     display: grid; 
     ${fontSize3}
+    ${lightBlueBackground}
     grid-gap: 5px; 
     grid-template-columns: repeat(3, 1fr); 
     justify-items: right; 
