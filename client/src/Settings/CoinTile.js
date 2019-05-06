@@ -34,9 +34,7 @@ export default function({coinKey, topSection}){
       //   TileClass = DisabledTile;
       // }
 
-      return <TileClass
-        onClick={clickCoinHandler(topSection, coinKey, addCoin, removeCoin)}
-      >
+      return <TileClass onClick={clickCoinHandler(topSection, coinKey, addCoin, removeCoin)}>
         <CoinHeaderGrid
           topSection={topSection}
           name={coin.CoinName}

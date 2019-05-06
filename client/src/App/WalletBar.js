@@ -31,24 +31,17 @@ const Amount = styled.div`
   text-align: left;
   padding-left: 15px;
   `
-
 const Welcome = styled.div`
   text-align: center
   font-size: 1.5em;
   `
 
 export default function () {
-  // return (<AppContext.Consumer>({ user }) =>{user ? <Bar>Balance: ${user.owned[0].CoinName}</Bar> : null }</AppContext.Consumer>);
     return (    <AppContext.Consumer>
       {({user}) => (
       <Bar>
         { user ? <Welcome> Your Wallet ${user.balance}</Welcome> : null }
-        { user ? null : <Welcome> Welcome to the Gold App. Login to start trading! </Welcome>
-        }        
-        {/* { user ? 
-          <Balance> Balance: ${user.balance} </Balance> :
-          null 
-        }  */}
+        { user ? null : <Welcome> Welcome to the Gold App. Login to start trading! </Welcome>}        
       <Inventory>
         {user ? <Amount>LTC : {user.owned[0].amount} </Amount> : null}
       </Inventory>

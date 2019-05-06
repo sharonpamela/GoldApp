@@ -13,7 +13,7 @@ module.exports = app => {
     passport.authenticate('google'),
     (req, res) => {
       if (process.env.NODE_ENV === 'production') {
-        res.redirect('/page/dashboard');
+        res.redirect('/dashboard');
       } else {
         res.redirect('http://localhost:3000/page/dashboard');
       }

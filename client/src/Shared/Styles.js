@@ -34,9 +34,11 @@ export const whiteTile = `backgound-color: ${color4};`;
 
 export const fontColorGreen = `color: #03A9F4`;  // unknown effect, not a green color 
 export const fontColorWhite = `color: white`;
+
 export const subtleBoxShadow = `box-shadow: 0px 0px 5px 1px ${lightTheme ? '#a9b6ff' : 'purple'}`;  // shadow on tiles, 
 export const greenBoxShadow = `box-shadow: 0px 0px 4px 2px white`;  // hoover shadow 
 export const redBoxShadow = `box-shadow: 0px 0px 2px 2px red`; // changed to gold from red
+
 
 export const fontSizeBig = 'font-size: 2em';
 export const fontSize1 = 'font-size: 1.5em;';

@@ -2,7 +2,6 @@ const router = require("express").Router();
 const usersController = require("../../Controllers/usersController");
 // we're inside /api
 
-// "/api/users"
 router.route('/')
     .get(usersController.findAll)
     .post(usersController.create);
@@ -16,7 +15,6 @@ router.route("/sell")
 router.route('/user_bal')
     .get(usersController.fetchBalance);
 
-// // "/api/currentUser"
 router.get('/current_user', (req, res) => {
     res.send(req.user);
 });

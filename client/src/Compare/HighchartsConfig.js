@@ -1,6 +1,4 @@
-export default function (historical) {
-  console.log(historical)
-  
+export default function (arrayOfSeriesDataSets) {
   return {
     title: {
       text: ''
@@ -27,7 +25,7 @@ export default function (historical) {
       }
     },
 
-    series: historical,
+    series: arrayOfSeriesDataSets,
 
     responsive: {
       rules: [{
