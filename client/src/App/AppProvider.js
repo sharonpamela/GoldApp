@@ -46,7 +46,7 @@ export class AppProvider extends React.Component {
   componentDidMount = () => {
     this.fetchCoins();
     this.fetchPrices();
-    // this.fetchHistorical();
+    this.fetchHistorical();
     this.fetchUser();
     this.fetchCompareHistorical();
   }
