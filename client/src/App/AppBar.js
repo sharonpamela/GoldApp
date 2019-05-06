@@ -8,11 +8,11 @@ const Logo = styled.div`
   padding-left: 10px;
 `
 
-const Login = styled.div`
-  font-size: 1.1em;
-  text-align: center;
-  margin: auto;
-  `
+// const Login = styled.div`
+//   font-size: 1.1em;
+//   text-align: center;
+//   margin: auto;
+//   `
   
 const Bar = styled.div`
   display: grid; 
