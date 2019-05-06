@@ -1,13 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import {AppContext} from "./AppProvider";
+import {subtleBoxShadow} from "./../Shared/Styles" 
 
 const Logo = styled.div`
   font-size: 1.5em; 
   padding-left: 10px;
 `
 const Login = styled.div`
-  font-size: 1em;
+  font-size: 1.1em;
   text-align: center;
   margin: auto;
   `
@@ -15,13 +16,16 @@ const Login = styled.div`
 const Bar = styled.div`
   display: grid; 
   margin-bottom: 40px; 
-  grid-template-columns: 180px 1fr 100px 100px; 
+  grid-template-columns: 1fr 100px 100px 100px 100px; 
   background-color:black;
+  opacity: 0.8;  
+  ${subtleBoxShadow}
 `
 
 
 const ControlButtonElem = styled.div`
   margin: auto;
+  text-align: center;
   cursor: pointer; 
   ${props => props.active && css`
     text-shadow: 0px 0px 60px #03ff03;

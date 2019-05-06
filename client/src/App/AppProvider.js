@@ -50,7 +50,7 @@ export class AppProvider extends React.Component {
     this.fetchPrices();
     this.fetchHistorical();
     this.fetchUser();
-
+  }
   fetchCoins = async () => {
     let coinList = (await cc.coinList()).Data;
     this.setState({ coinList });
