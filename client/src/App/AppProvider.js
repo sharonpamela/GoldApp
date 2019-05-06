@@ -3,7 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import axios from 'axios';
 import API from "../utils/API";
-import debounce from "debounce-promise";
+// import debounce from "debounce-promise"; //used to slow down the API calls
 const cc = require('cryptocompare');
 export const AppContext = React.createContext();
 
@@ -46,7 +46,7 @@ export class AppProvider extends React.Component {
   componentDidMount = () => {
     this.fetchCoins();
     this.fetchPrices();
-    this.fetchHistorical();
+    // this.fetchHistorical();
     this.fetchUser();
     this.fetchCompareHistorical();
   }
@@ -112,21 +112,24 @@ export class AppProvider extends React.Component {
         {
           name: favs[i],
           data: results.map((ticker, index) => [
-            moment().subtract({ [this.state.timeInterval]: TIME_UNITS - index }).valueOf(),
+            moment().subtract({ [this.state.timeInterval]: COMPARE_TIME_UNITS - index }).valueOf(),
             ticker.USD
           ])
         }
       arrayOfResultObjs.push(historical)
     }
+    console.log("arrayOfResultObjs", arrayOfResultObjs)
     this.setState({ arrayOfSeriesDataSets:arrayOfResultObjs });
   }
 
   compareHistorical = (coin) => {
     let promises = [];
-    for (let units = TIME_UNITS; units > 0; units--) {
-      let debounced = debounce(cc.priceHistorical(coin,['USD'],
-      moment().subtract({ [this.state.timeInterval]: units }).toDate()), 3000);
-      promises.push(debounced);
+    for (let units = COMPARE_TIME_UNITS; units > 0; units--) {
+      // let debounced = debounce(cc.priceHistorical(coin,['USD'],
+      // moment().subtract({ [this.state.timeInterval]: units }).toDate()), 3000);
+      // promises.push(debounced);
+      promises.push(cc.priceHistorical(coin,['USD'],
+      moment().subtract({ [this.state.timeInterval]: units }).toDate()));
     }
     return Promise.all(promises);
   }
