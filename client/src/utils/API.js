@@ -19,12 +19,10 @@ export default {
   },
 
   buyButton: function(userData){
-    console.log("hit buy button inside API")
     return axios.post("/api/buy", userData)
   },
 
   sellButton: function(userData){
-    console.log("sell button hit at API.js")
     return axios.post("/api/sell", userData)
   }
 };
