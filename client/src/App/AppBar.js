@@ -56,7 +56,7 @@ export default function(){
       } 
       <ControlButton active name="dashboard"/>
       <ControlButton name="settings"/>
-      <ControlButton name="home"/>
+      <ControlButton name="compare"/>
     </Bar>
     )}
     </AppContext.Consumer>

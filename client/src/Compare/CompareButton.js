@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {AppContext} from "../App/AppProvider";
 import {fontSize1, greenBoxShadow, color3} from "../Shared/Styles";
 
-const ConfirmButtonStyled = styled.div`
+const CompareButtonStyled = styled.div`
   margin: 20px;
   color: ${color3}
   ${fontSize1} 
@@ -13,6 +13,7 @@ const ConfirmButtonStyled = styled.div`
     ${greenBoxShadow} 
   }
 `
+
 export const CenterDiv = styled.div`
   display: grid;
   justify-content: center;
@@ -22,9 +23,9 @@ export default function () {
   return <AppContext.Consumer>
     {({confirmFavorites}) =>
       <CenterDiv>
-        <ConfirmButtonStyled onClick={confirmFavorites}>
-          Confirm Favorites
-        </ConfirmButtonStyled>
+        <CompareButtonStyled onClick={confirmFavorites}>
+          Compare
+        </CompareButtonStyled>
       </CenterDiv>
     }
   </AppContext.Consumer>;

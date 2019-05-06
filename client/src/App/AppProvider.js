@@ -21,6 +21,7 @@ export class AppProvider extends React.Component {
       owned: [],
       favorites: ['ZEC', 'ETH', 'ETC', '300', 'LTC'],
       store: ['LTC', '300', 'ETH', 'ETC', 'ZEC'],
+      selectedForCompare:['LTC'],
       timeInterval: 'months',
       ...this.savedSettings(),
       setPage: this.setPage,
@@ -28,8 +29,11 @@ export class AppProvider extends React.Component {
       addCoin: this.addCoin,
       removeCoin: this.removeCoin,
       isInFavorites: this.isInFavorites,
+      isInCompareList: this.isInCompareList,
       isInStore: this.isInStore,
       confirmFavorites: this.confirmFavorites,
+      removeSelectedCoin: this.removeSelectedCoin,
+      addSelectedCoin: this.addSelectedCoin,
       setCurrentFavorite: this.setCurrentFavorite,
       setFilteredCoins: this.setFilteredCoins,
       changeChartSelect: this.changeChartSelect,
@@ -62,6 +66,18 @@ export class AppProvider extends React.Component {
     this.setState({ prices });
   }
 
+  prices = async () => {
+    let returnData = [];
+    for (let i = 0; i < this.state.favorites.length; i++) {
+      try {
+        let priceData = await cc.priceFull(this.state.favorites[i], 'USD');
+        returnData.push(priceData);
+      } catch (e) {
+        console.warn('Fetch price error: ', e);
+      }
+    }
+    return returnData;
+  }
   fetchHistorical = async () => {
     if (this.state.firstVisit) return;
     let results = await this.historical();
@@ -75,19 +91,6 @@ export class AppProvider extends React.Component {
       }
     ]
     this.setState({ historical });
-  }
-
-  prices = async () => {
-    let returnData = [];
-    for (let i = 0; i < this.state.favorites.length; i++) {
-      try {
-        let priceData = await cc.priceFull(this.state.favorites[i], 'USD');
-        returnData.push(priceData);
-      } catch (e) {
-        console.warn('Fetch price error: ', e);
-      }
-    }
-    return returnData;
   }
 
   historical = () => {
@@ -108,6 +111,7 @@ export class AppProvider extends React.Component {
 
   addCoin = key => {
     let favorites = [...this.state.favorites];
+    console.log(key, "favorites addcoin key");
     if (favorites.length < MAX_FAVORITES) {
       favorites.push(key);
       this.setState({ favorites });
@@ -116,10 +120,30 @@ export class AppProvider extends React.Component {
 
   removeCoin = key => {
     let favorites = [...this.state.favorites];
+    // pull returns a new array with that value removed
     this.setState({ favorites: _.pull(favorites, key) })
   }
 
+  addSelectedCoin = key => {
+    console.log(key, "key from addSelectedCoin")
+    let selected = [...this.state.selectedForCompare];
+    console.log(selected,"selected array")
+    selected.push(key);
+    this.setState({ selectedForCompare : selected });
+    
+  }
+
+  removeSelectedCoin = key => {
+    let selected = [...this.state.selectedForCompare];
+    // pull returns a new array with that value removed
+    this.setState({ selectedForCompare: _.pull(selected, key) })
+  }
+
   isInFavorites = key => _.includes(this.state.favorites, key)
+
+  isInCompareList = key => {
+    console.log(key, "from isInCompareLst")
+    _.includes(this.state.selectedForCompare, key)}
 
   isInStore = key => _.includes(this.state.store, key)
 
@@ -226,9 +250,6 @@ export class AppProvider extends React.Component {
       }
     })
   };
-
-
-
 
   setPage = page => this.setState({ page })
 
