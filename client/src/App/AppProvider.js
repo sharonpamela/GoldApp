@@ -3,7 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import axios from 'axios';
 import API from "../utils/API";
-
+import debounce from "debounce-promise";
 const cc = require('cryptocompare');
 export const AppContext = React.createContext();
 
@@ -48,6 +48,7 @@ export class AppProvider extends React.Component {
     this.fetchPrices();
     this.fetchHistorical();
     this.fetchUser();
+    this.fetchCompareHistorical();
   }
   fetchCoins = async () => {
     let coinList = (await cc.coinList()).Data;
@@ -98,13 +99,13 @@ export class AppProvider extends React.Component {
     }
     return Promise.all(promises);
   }
+
   fetchCompareHistorical = async () => {
     if (this.state.firstVisit) return;
     // if (this.state.page != "compare") return;
     let favs = this.state.favorites;
     let arrayOfResultObjs =[]
-    // call historical for each object in the favs array
-    // store the data as an object in the arrayOfResults
+    // call historical for each object in the favs array store the data as an object in the arrayOfResults
     for (let i=0 ; i< favs.length ; i++){
       let results = await this.compareHistorical(favs[i]);
       let historical =
@@ -115,21 +116,21 @@ export class AppProvider extends React.Component {
             ticker.USD
           ])
         }
-      
       arrayOfResultObjs.push(historical)
     }
     this.setState({ arrayOfSeriesDataSets:arrayOfResultObjs });
   }
+
   compareHistorical = (coin) => {
     let promises = [];
     for (let units = TIME_UNITS; units > 0; units--) {
-      promises.push(cc.priceHistorical(coin,['USD'],
-          moment().subtract({ [this.state.timeInterval]: units }).toDate()
-        )
-      )
+      let debounced = debounce(cc.priceHistorical(coin,['USD'],
+      moment().subtract({ [this.state.timeInterval]: units }).toDate()), 3000);
+      promises.push(debounced);
     }
     return Promise.all(promises);
   }
+
   fetchCompareHistorical2 = async () => {
     if (this.state.firstVisit) return;
     let arrayOfSeriesDataSets = await this.compareHistorical();
