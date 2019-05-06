@@ -17,8 +17,8 @@ export default function () {
     <AppContext.Consumer>
       {({selectedForCompare}) => (
         <Style>
-            Select the coins you wish to compare then click "Compare": 
-            {selectedForCompare}
+            The graph below compares all of the coins in the favorites list.
+            {/* {selectedForCompare} */}
         </Style>
       )}
     </AppContext.Consumer>

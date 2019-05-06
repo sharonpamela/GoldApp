@@ -1,5 +1,4 @@
 export default function (arrayOfSeriesDataSets) {
-  console.log("datasets from highcharts config", arrayOfSeriesDataSets)
   return {
     title: {
       text: ''
