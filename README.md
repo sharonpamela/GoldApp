@@ -16,23 +16,23 @@ This app is currently hosted at: https://powerful-woodland-79930.herokuapp.com/
 ### Highlighted Technologies used:
 
 #### Front end
-React Context: allows sharing values between components without having to explicitly pass props
-cryptocompare: API for real time crypcurrency information
-fuzzy: for searching within the app
-http-proxy-middleware: proxy for multiple different routes
-lodash: for performance
-moment: time library
-react: create the basic initial boilerplate of the app
-react-highcharts: graph data from the API
-styled-components: keep all CSS within the component it belongs to
+- React Context: allows sharing values between components without having to explicitly pass props
+- cryptocompare: API for real time crypcurrency information
+- fuzzy: for searching within the app
+- http-proxy-middleware: proxy for multiple different routes
+- lodash: for performance
+- moment: time library
+- react: create the basic initial boilerplate of the app
+- react-highcharts: graph data from the API
+- styled-components: keep all CSS within the component it belongs to
 
 #### Back end
-axios: generate REST calls
-cookie-session: store user's infomation
-express
-mongojs: database
-mongoose: database
-MongoDB Atlas: hosted Mongo DB
-passport and passport-google-oauth20: login capabilities
+- axios: generate REST calls
+- cookie-session: store user's infomation
+- express
+- mongojs: database
+- mongoose: database
+- MongoDB Atlas: hosted Mongo DB
+- passport and passport-google-oauth20: login capabilities
 
 
