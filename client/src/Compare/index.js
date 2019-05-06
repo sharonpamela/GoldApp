@@ -25,7 +25,7 @@ export default function(){
     <SelectionStyle>
       <SelectedCoins/>
       <PriceGrid/>
-      <CompareButton />
+      {/* <CompareButton /> */}
     </SelectionStyle>
     <ChartGrid>
       <PriceChart/>

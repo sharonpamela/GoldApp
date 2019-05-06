@@ -21,7 +21,7 @@ const ChartSelect = styled.select`
 export default function(){
   return (
     <AppContext.Consumer>
-      {({historical, changeChartSelect}) =>
+      {({arrayOfSeriesDataSets, changeChartSelect}) =>
         <Tile>
           <ChartSelect
             defaultValue="months"
@@ -31,8 +31,8 @@ export default function(){
             <option value="weeks"> Weeks </option>
             <option value="months"> Months </option>
           </ChartSelect>
-          {historical ?
-            <ReactHighcharts config={highchartsConfig(historical)}/>
+          {arrayOfSeriesDataSets ?
+            <ReactHighcharts config={highchartsConfig(arrayOfSeriesDataSets)}/>
             : <div> Loading Historical Data </div>
           }
         </Tile>

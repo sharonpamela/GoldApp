@@ -50,44 +50,27 @@ function ChangePercent({ data }) {
   );
 }
 
-function clickCoinHandler(sym, coinKey, addSelectedCoin, removeSelectedCoin, isInCompareList) {
+// function clickCoinHandler(sym, coinKey, addSelectedCoin, removeSelectedCoin, isInCompareList) {
 
-  
-  console.log(coinKey, "coinKey");
+//   console.log(coinKey, "coinKey");
 
-  if(isInCompareList(coinKey)){
-    return removeSelectedCoin(coinKey)
-  } else {
-    return addSelectedCoin(coinKey)
-  }
-  // console.log(selectedForCompare, "selectedForCompare");
-  // console.log(sym, "sym");
-  // return addSelectedCoin(sym);
-
-  // for (let i = 0 ; i < selectedForCompare; i++){
-  //   if (selectedForCompare[i] === sym)
-  //     //return addSelectedCoin(sym);
-  //     console.log("found a match")
-  // }
-  // let isInCompare = true;
-  // return isInCompare ? () => {
-  //   
-  // } : () => {
-  //   addSelectedCoin(coinKey)
-  // }
-}
+//   if(isInCompareList(coinKey)){
+//     return removeSelectedCoin(coinKey)
+//   } else {
+//     return addSelectedCoin(coinKey)
+//   }
+// }
 
 export default function ({ price, index }) {
   let sym = Object.keys(price)[0];
   let data = price[sym]['USD'];
-
+//onClick={clickCoinHandler(sym, index, addSelectedCoin, removeSelectedCoin, isInCompareList)}
   return (
     <AppContext.Consumer>
       {({ isInCompareList, selectedForCompare, addSelectedCoin, removeSelectedCoin }) =>
-        <PriceTileStyled onClick={clickCoinHandler(sym, index, addSelectedCoin, removeSelectedCoin, isInCompareList)}>
+        <PriceTileStyled>
           <CoinHeaderGridStyle>
             <div> {sym} </div>
-            <div>{index} </div>
             <ChangePercent data={data} />
           </CoinHeaderGridStyle>
           <TickerPriceStyle>
@@ -98,14 +81,4 @@ export default function ({ price, index }) {
     </AppContext.Consumer>
   )
 }
-        // <PriceTile
-          // sym={sym}
-          // data={data}
-          // selectedForCompare = {selectedForCompare}
-          // // currentFavorite={currentFavorite === sym}
-          // coinKey={index}
-          // // setCurrentFavorite={() => setCurrentFavorite(sym)}
-          // addSelectedCoin= {() => addSelectedCoin(index)}
-          // removeSelectedCoin= {() => removeSelectedCoin (index)}
-        // >
-        // </PriceTile>
+     

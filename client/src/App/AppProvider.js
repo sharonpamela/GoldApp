@@ -10,6 +10,7 @@ export const AppContext = React.createContext();
 
 const MAX_FAVORITES = 10;
 const TIME_UNITS = 10;
+const COMPARE_TIME_UNITS = 5;
 
 export class AppProvider extends React.Component {
   constructor(props) {
@@ -21,11 +22,11 @@ export class AppProvider extends React.Component {
       owned: [],
       favorites: ['ZEC', 'ETH', 'ETC', '300', 'LTC'],
       store: ['LTC', '300', 'ETH', 'ETC', 'ZEC'],
-      selectedForCompare:['LTC'],
+      selectedForCompare: ['LTC'],
       timeInterval: 'months',
       ...this.savedSettings(),
       setPage: this.setPage,
-      pageTheme:'dark',
+      pageTheme: 'dark',
       addCoin: this.addCoin,
       removeCoin: this.removeCoin,
       isInFavorites: this.isInFavorites,
@@ -46,7 +47,8 @@ export class AppProvider extends React.Component {
     this.fetchCoins();
     this.fetchPrices();
     this.fetchHistorical();
-    this.fetchUser(); 
+    this.fetchUser();
+    this.fetchCompareHistorical();
 
   }
 
@@ -96,22 +98,86 @@ export class AppProvider extends React.Component {
   historical = () => {
     let promises = [];
     for (let units = TIME_UNITS; units > 0; units--) {
-      promises.push(
-        cc.priceHistorical(
-          this.state.currentFavorite,
-          ['USD'],
-          moment()
-            .subtract({ [this.state.timeInterval]: units })
-            .toDate()
+      promises.push(cc.priceHistorical(this.state.currentFavorite,['USD'],
+          moment().subtract({ [this.state.timeInterval]: units }).toDate()
+        )
+      )
+    }
+    return Promise.all(promises);
+  }
+  fetchCompareHistorical = async () => {
+    if (this.state.firstVisit) return;
+    // if (this.state.page != "compare") return;
+    let favs = this.state.favorites;
+    let arrayOfResultObjs =[]
+
+    // call historical for each object in the favs array
+    // store the data as an object in the arrayOfResults
+
+    for (let i=0 ; i< favs.length ; i++){
+      let results = await this.compareHistorical(favs[i]);
+      let historical =
+        {
+          name: favs[i],
+          data: results.map((ticker, index) => [
+            moment().subtract({ [this.state.timeInterval]: TIME_UNITS - index }).valueOf(),
+            ticker.USD
+          ])
+        }
+      
+      arrayOfResultObjs.push(historical)
+    }
+    this.setState({ arrayOfSeriesDataSets:arrayOfResultObjs });
+  }
+
+  compareHistorical = (coin) => {
+    let promises = [];
+    for (let units = TIME_UNITS; units > 0; units--) {
+      promises.push(cc.priceHistorical(coin,['USD'],
+          moment().subtract({ [this.state.timeInterval]: units }).toDate()
         )
       )
     }
     return Promise.all(promises);
   }
 
+  fetchCompareHistorical2 = async () => {
+    if (this.state.firstVisit) return;
+    let arrayOfSeriesDataSets = await this.compareHistorical();
+    this.setState({ arrayOfSeriesDataSets });
+  }
+
+  compareHistorical2 = () => {
+    let promises = [];
+    let favs = this.state.favorites;
+    let arrayOfSeries = [];
+    let tempArr =[];
+    let name;
+    let data;
+    for (let i = 0; i < favs.length; i++) {
+      for (let units = COMPARE_TIME_UNITS; units > 0; units--) {
+        promises.push(cc.priceHistorical(
+          favs[i],['USD'],moment().subtract({ [this.state.timeInterval]: units }).toDate())
+        )
+        tempArr.push(Promise.all(promises)) // stores 5 calls in array
+        // let valArr = tempArr.map((promise,index) => promise.resolved)
+      }
+      name = favs[i]
+      data = tempArr.map((ticker, index) => [moment()
+        .subtract({ [this.state.timeInterval]: COMPARE_TIME_UNITS - index })
+        .valueOf(),
+        ticker.USD])
+  
+      arrayOfSeries.push({name:name, data:data}) // pushes the array of 5 calls into array of series
+      promises =[];
+      tempArr=[];
+    }
+    return arrayOfSeries;
+  }
+
+
   addCoin = key => {
     let favorites = [...this.state.favorites];
-    console.log(key, "favorites addcoin key");
     if (favorites.length < MAX_FAVORITES) {
       favorites.push(key);
       this.setState({ favorites });
@@ -125,12 +191,9 @@ export class AppProvider extends React.Component {
   }
 
   addSelectedCoin = key => {
-    console.log(key, "key from addSelectedCoin")
     let selected = [...this.state.selectedForCompare];
-    console.log(selected,"selected array")
     selected.push(key);
-    this.setState({ selectedForCompare : selected });
-    
+    this.setState({ selectedForCompare: selected });
   }
 
   removeSelectedCoin = key => {
@@ -142,8 +205,8 @@ export class AppProvider extends React.Component {
   isInFavorites = key => _.includes(this.state.favorites, key)
 
   isInCompareList = key => {
-    console.log(key, "from isInCompareLst")
-    _.includes(this.state.selectedForCompare, key)}
+    _.includes(this.state.selectedForCompare, key)
+  }
 
   isInStore = key => _.includes(this.state.store, key)
 
@@ -163,6 +226,14 @@ export class AppProvider extends React.Component {
       favorites: this.state.favorites,
       currentFavorite
     }));
+  }
+
+  compareSelected = () => {
+    this.setState(() => {
+      this.fetchPrices();
+      this.fetchCompareHistorical();
+    });
+
   }
 
   setCurrentFavorite = (sym) => {
@@ -187,28 +258,24 @@ export class AppProvider extends React.Component {
   }
 
   buyButton = async (currentFavorite) => {
-    console.log("buy button hit");
     this.state.prices.forEach(async price => {
       if (price[this.state.currentFavorite]) {
         const sym = price[this.state.currentFavorite].USD.FROMSYMBOL;
         const own = this.state.user.owned;
 
         if (price[this.state.currentFavorite].USD.PRICE < this.state.user.balance) {
-          console.log(" cash bro")
 
           for (let i = 0; i < own.length; i++) {
             if (own[i].CoinName === sym) {
               own[i].amount++;
             }
           }
-          console.log(own, "own");
           const response = await API.buyButton({
             price: price[this.state.currentFavorite].USD.PRICE,
             balance: this.state.user.balance,
             googleId: this.state.user.googleId,
             owned: own,
           });
-          console.log(response.data.balance, "response")
           this.fetchUser();
           const numberFormat = number => {
             return +(number + '').slice(0, 7);
@@ -221,7 +288,6 @@ export class AppProvider extends React.Component {
   };
 
   sellButton = async (currentFavorite) => {
-    console.log("sell button hit");
     this.state.prices.forEach(async price => {
       if (price[this.state.currentFavorite]) {
         const sym = price[this.state.currentFavorite].USD.FROMSYMBOL;
@@ -229,7 +295,6 @@ export class AppProvider extends React.Component {
         for (let i = 0; i < own.length; i++) {
           if (own[i].CoinName === sym && own[i].amount > 0) {
             own[i].amount--;
-            console.log(own, "own");
             const response = await API.sellButton({
               price: price[this.state.currentFavorite].USD.PRICE,
               balance: this.state.user.balance,
@@ -237,7 +302,6 @@ export class AppProvider extends React.Component {
               owned: own,
             });
 
-            console.log(response.data, "response")
             this.fetchUser();
             const numberFormat = number => {
               return +(number + '').slice(0, 7);
