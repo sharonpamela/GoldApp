@@ -29,7 +29,7 @@ This app is currently hosted at: https://powerful-woodland-79930.herokuapp.com/
 
 #### Back end
 - axios: generate REST calls
-- cookie-session: store user's infomation
+- cookie-session: store user's information
 - express
 - mongojs: database
 - mongoose: database
