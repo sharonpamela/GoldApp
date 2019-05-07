@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import {AppContext} from "./AppProvider";
-import {subtleBoxShadow} from "./../Shared/Styles" 
+import {subtleBoxShadow, lightBlueBackground} from "./../Shared/Styles" 
 
 const Logo = styled.div`
   font-size: 1.5em; 
@@ -18,7 +18,7 @@ const Bar = styled.div`
   display: grid; 
   margin-bottom: 40px; 
   grid-template-columns: 1fr 100px 100px 100px 100px; 
-  background-color:black;
+  ${lightBlueBackground}
   opacity: 0.8;  
   ${subtleBoxShadow}
 `
@@ -61,15 +61,15 @@ export default function(){
     {({user}) => (
     <Bar>
       <Logo> Gold </Logo>
-      {/* { user ? 
+      { user ? 
         <a href="http://localhost:3001/api/logout"><ControlButton name="logout"/></a>:
         <a href="http://localhost:3001/auth/google"><ControlButton name="login"/></a>
-      }  */}
+      } 
 
-      { user ? 
+      {/* { user ? 
         <a href="/api/logout"><ControlButton name="logout"/></a>:
         <a href="/auth/google"><ControlButton name="login"/></a>
-      } 
+      }  */}
       <ControlButton active name="dashboard"/>
       <ControlButton name="settings"/>
       <ControlButton name="compare"/>

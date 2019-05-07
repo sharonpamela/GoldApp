@@ -7,7 +7,6 @@ import Settings from '../Settings';
 import Dashboard from '../Dashboard';
 import Content from '../Shared/Content';
 import Compare from '../Compare';
-import WalletBar from './WalletBar';
 
 class App extends Component {
   render() {
@@ -20,7 +19,6 @@ class App extends Component {
             <Dashboard />
             <Compare />
           </Content>
-          <WalletBar/>
         </AppProvider>
       </AppLayout>
     );
