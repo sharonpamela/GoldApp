@@ -8,7 +8,21 @@ This app is currently hosted at: https://powerful-woodland-79930.herokuapp.com/
 Video Demo: https://www.youtube.com/watch?v=_W2QuoAedhA
 
 ### Images of UI:
+
+Settings Page:
 ![Settings Page](/settings.png)
+
+Dashboard Page:
+![Dashboard Page](/dashboard.png)
+
+Compare Page:
+![Compare Page](/compare.png)
+
+Silver Theme Dashboard:
+![Silver Themed Dashboard](/silvertheme1.png)
+
+Silver Theme Settings:
+![Silver Themed Settings](/silvertheme2.png)
 
 ### Current features:
 - Login: Ability to log in using Google's Auth20 
