@@ -1,18 +1,16 @@
-import React from 'react';
-import {AppContext} from "../App/AppProvider";
-
+console.log("LOADING STYLES.JS")
 var theme;
 
-export default function () {
-  return (
-    <AppContext.Consumer>
-      {({pageTheme}) =>
-          { console.log(pageTheme, "pagetheme")
-            theme = pageTheme}
-      }
-    </AppContext.Consumer>
-  );
-};
+
+let localStorageObj = JSON.parse(localStorage.getItem('cryptoDash'))
+if(!localStorageObj){
+  theme = 'dark';
+}
+else {
+  theme = localStorageObj.pageTheme
+}
+console.log(theme, "theme");
+
 // const theme = 'dark';
 // const theme = 'light';
 export const lightTheme = theme === 'light';

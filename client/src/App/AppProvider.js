@@ -23,10 +23,11 @@ export class AppProvider extends React.Component {
       store: ['LTC', '300', 'ETH', 'ETC', 'ZEC'],
       selectedForCompare: ['LTC'],
       timeInterval: 'months',
-      ...this.savedSettings(),
-      setPage: this.setPage,
       pageTheme: 'dark',
+      ...this.savedSettings(),
       setTheme: this.setTheme,
+      changeTheme: this.changeTheme,
+      setPage: this.setPage,
       addCoin: this.addCoin,
       removeCoin: this.removeCoin,
       isInFavorites: this.isInFavorites,
@@ -39,8 +40,8 @@ export class AppProvider extends React.Component {
       setFilteredCoins: this.setFilteredCoins,
       changeChartSelect: this.changeChartSelect,
       buyButton: this.buyButton,
-      sellButton: this.sellButton,
-      changeTheme: this.changeTheme
+      sellButton: this.sellButton
+      
     }
   }
   componentDidMount = () => {
@@ -50,6 +51,7 @@ export class AppProvider extends React.Component {
     this.fetchUser();
     this.fetchCompareHistorical();
   }
+
   fetchCoins = async () => {
     let coinList = (await cc.coinList()).Data;
     this.setState({ coinList });
@@ -230,6 +232,7 @@ export class AppProvider extends React.Component {
       this.fetchCompareHistorical();
     });
   }
+
   setCurrentFavorite = (sym) => {
     this.setState({
       currentFavorite: sym,
@@ -240,14 +243,16 @@ export class AppProvider extends React.Component {
       currentFavorite: sym
     }))
   }
+
   savedSettings() {
     let cryptoDashData = JSON.parse(localStorage.getItem('cryptoDash'));
     if (!cryptoDashData) {
-      return { page: 'settings', firstVisit: true }
+      return { page: 'settings', firstVisit: true, pageTheme: 'dark' }
     }
-    let { favorites, currentFavorite } = cryptoDashData;
-    return { favorites, currentFavorite };
+    let { favorites, currentFavorite, pageTheme } = cryptoDashData;
+    return { favorites, currentFavorite, pageTheme };
   }
+  
   buyButton = async (currentFavorite) => {
     this.state.prices.forEach(async price => {
       if (price[this.state.currentFavorite]) {
@@ -274,6 +279,7 @@ export class AppProvider extends React.Component {
       }
     })
   };
+
   sellButton = async (currentFavorite) => {
     this.state.prices.forEach(async price => {
       if (price[this.state.currentFavorite]) {
@@ -299,9 +305,47 @@ export class AppProvider extends React.Component {
       }
     })
   };
+
+  setTheme = () => { 
+    let cryptoDashData = JSON.parse(localStorage.getItem('cryptoDash'));
+     if (!cryptoDashData) {
+      return  this.setState({ pageTheme: 'dark' })
+    }
+    let { pageTheme } = cryptoDashData;
+    return this.setState({ pageTheme: pageTheme});
+   }
+
+  changeTheme = () => {
+    console.log("change theme fired")
+    console.log(this.state.pageTheme, "page theme state")
+     if (this.state.pageTheme === 'dark') {
+       
+      this.setState({ pageTheme: 'light' })
+
+      localStorage.setItem("cryptoDash", JSON.stringify({
+        ...JSON.parse(localStorage.getItem('cryptoDash')),
+        pageTheme : 'light'
+      }))
+
+      // wait 1-2 secs
+
+     }
+    else {
+       this.setState({ pageTheme: 'dark' })
+
+       localStorage.setItem("cryptoDash", JSON.stringify({
+        ...JSON.parse(localStorage.getItem('cryptoDash')),
+        pageTheme : 'dark'
+      }))
+     }
+     window.location.reload();
+  }
+
+
   setPage = page => this.setState({ page })
-  setTheme = theme => this.setState({ theme })
+  
   setFilteredCoins = (filteredCoins) => this.setState({ filteredCoins })
+  
   changeChartSelect = (value) => {
     this.setState({ timeInterval: value, historical: null }, this.fetchHistorical);
   }
