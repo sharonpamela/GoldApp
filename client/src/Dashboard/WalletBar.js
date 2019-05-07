@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AppContext } from "./AppProvider";
-import {subtleBoxShadow} from "./../Shared/Styles";
+import { AppContext } from "../App/AppProvider";
+import {subtleBoxShadow, lightBlueBackground} from "../Shared/Styles";
 
 const Bar = styled.div`
   display: grid; 
   margin-top: 10px; 
   grid-template-columns: 1fr; 
-  background-color:black;
+  ${lightBlueBackground}
   opacity: 0.8;
   width: auto;
   text-align: center;
@@ -18,12 +18,12 @@ const Bar = styled.div`
 const Inventory = styled.div`
   margin-top: 0px;
   grid-template-columns: 150px 1fr;
-  background-color:black;
-  `
+  ${lightBlueBackground} 
+   `
   const Inventory2 = styled.div`
   margin-top: 0px;
   grid-template-columns: 150px 1fr;
-  background-color:black;
+  ${lightBlueBackground} 
   margin-bottom: 5px;
   `
 const Amount = styled.div`
