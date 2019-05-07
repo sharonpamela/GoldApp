@@ -16,7 +16,7 @@ Dashboard Page:
 ![Dashboard Page](/dashboard.png)
 
 Compare Page:
-![Compare Page](/compare.png)
+![Compare Page](/compare2.png)
 
 Silver Theme Dashboard:
 ![Silver Themed Dashboard](/silvertheme1.png)
