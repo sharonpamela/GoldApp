@@ -4,8 +4,8 @@
 Gold is a Node.JS react application that fascilitate a dashboard for viewing and comparing crytocurrency prices and other stats. 
 
 ### Access:
-This app is currently hosted at: https://powerful-woodland-79930.herokuapp.com/ 
-Video Demo: https://www.youtube.com/watch?v=_W2QuoAedhA
+- This app is currently hosted at: https://powerful-woodland-79930.herokuapp.com/ 
+- Video Demo: https://www.youtube.com/watch?v=_W2QuoAedhA
 
 ### Images of UI:
 
