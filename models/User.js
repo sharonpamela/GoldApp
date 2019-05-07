@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
   googleId: String,
-  balance: { type: Number, default: 300 },
+  balance: { type: Number, default: 1000 },
   favorites: String,
   price: Number,
   owned: {

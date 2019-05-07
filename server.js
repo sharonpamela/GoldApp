@@ -11,8 +11,8 @@ require('./services/passport');
 const usersController = require("./controllers/usersController");
 
 mongoose.Promise = global.Promise;
-//mongoose.connect(keys.mongoURI, { useNewUrlParser: true } );
- mongoose.connect("mongodb://localhost/gold" , { useNewUrlParser: true } );
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true } );
+//mongoose.connect("mongodb://localhost/gold" , { useNewUrlParser: true } );
 
 const app = express();
 
