@@ -1,5 +1,7 @@
 import React from 'react';
 import {AppContext} from "../App/AppProvider";
+// import styled from 'styled-components';
+// import {fontSize1, color3, subtleBoxShadow, lightBlueBackground} from "../Shared/Styles";
 
 export default function ({firstVisit}) {
   return (
