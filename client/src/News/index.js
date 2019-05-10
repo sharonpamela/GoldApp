@@ -1,10 +1,10 @@
 import React from 'react';
-import WelcomeMessage from './WelcomeMessage'
+import Message from './Message'
 import Page from '../Shared/Page';
 
 
 export default function(){
-  return <Page name="settings">
-    <WelcomeMessage/>
+  return <Page name="news">
+    <Message/>
   </Page>
 }
