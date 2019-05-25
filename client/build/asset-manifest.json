@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a26d43c4.chunk.css",
+    "main.js": "/static/js/main.ac9d61f4.chunk.js",
+    "main.js.map": "/static/js/main.ac9d61f4.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.40f60661.chunk.js": "/static/js/2.40f60661.chunk.js",
+    "static/js/2.40f60661.chunk.js.map": "/static/js/2.40f60661.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.bce0a9c45c9794477a005f0f6786c075.js": "/precache-manifest.bce0a9c45c9794477a005f0f6786c075.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.a26d43c4.chunk.css.map": "/static/css/main.a26d43c4.chunk.css.map",
+    "static/media/App.css": "/static/media/gold-melt-2.4d012f6a.jpg"
+  }
+}
